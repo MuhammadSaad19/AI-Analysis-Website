@@ -6,5 +6,6 @@ pillow
 tensorflow
 torch
 torchvision
+requests
 google-generativeai
 pydantic
