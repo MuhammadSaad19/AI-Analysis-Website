@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<header>
+  <div class="logo-chip"><span></span> AI Studio</div>
+  <h1>Three Models.<br>One Interface.</h1>
+  <p class="subtitle">image classification · nlp inference · gemini agent</p>
+</header>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab-btn active" data-tab="image" onclick="switchTab('image')">
+    <span class="tab-dot"></span> Image Classifier
+  </button>
+  <button class="tab-btn" data-tab="nlp" onclick="switchTab('nlp')">
+    <span class="tab-dot"></span> NLP Model
+  </button>
+  <button class="tab-btn" data-tab="agent" onclick="switchTab('agent')">
+    <span class="tab-dot"></span> Gemini Agent
+  </button>
+</div>
+
+<!-- PANELS -->
+<div class="panels">
+
+  <!-- ── IMAGE CLASSIFICATION ── -->
+  <div id="panel-image" class="panel active">
+    <div class="card">
+      <div class="card-title">🖼️ Image Classification</div>
+      <div class="card-desc">Upload an image — your Keras (.h5) model will predict the class.</div>
+
+      <div class="upload-zone" id="upload-zone"
+           ondragover="handleDrag(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)"
+           onclick="document.getElementById('img-input').click()">
+        <input type="file" id="img-input" accept="image/*" onchange="handleImageSelect(event)"/>
+        <div class="upload-icon">📂</div>
+        <strong>Drop an image here or click to browse</strong>
+        <p>PNG, JPG, WEBP supported</p>
+      </div>
+
+      <img id="image-preview" src="" alt="preview"/>
+
+      <button class="btn btn-purple" onclick="classifyImage()" id="classify-btn" disabled>
+        ⚡ Classify Image
+      </button>
+
+      <div class="loader" id="img-loader">
+        <div class="spinner"></div> Running inference…
+      </div>
+
+      <div class="error-msg" id="img-error"></div>
+
+      <div class="result-box" id="img-result">
+        <div class="result-label">Prediction</div>
+        <div class="result-main" id="img-pred-label">—</div>
+        <div class="result-conf" id="img-pred-conf"></div>
+        <div class="bar-chart" id="img-bars"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── NLP MODEL ── -->
+  <div id="panel-nlp" class="panel">
+    <div class="card">
+      <div class="card-title">🧠 NLP / ML Model</div>
+      <div class="card-desc">Enter text — your PyTorch (.pt) model will run inference on it.</div>
+
+      <textarea id="nlp-input" placeholder="Enter your text here…" rows="4"></textarea>
+
+      <button class="btn btn-cyan" onclick="runNLP()" id="nlp-btn">
+        ▶ Run Inference
+      </button>
+
+      <div class="loader" id="nlp-loader">
+        <div class="spinner"></div> Processing text…
+      </div>
+
+      <div class="error-msg" id="nlp-error"></div>
+
+      <div class="result-box" id="nlp-result">
+        <div class="result-label">Prediction</div>
+        <div class="result-main" id="nlp-pred-label">—</div>
+        <div class="result-conf" id="nlp-pred-conf"></div>
+        <div class="bar-chart" id="nlp-bars"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── GEMINI AGENT ── -->
+  <div id="panel-agent" class="panel">
+    <div class="card">
+      <div class="card-title">✨ Gemini Agent</div>
+      <div class="card-desc">Chat with your Gemini-powered agentic AI. Maintains conversation history.</div>
+
+      <div class="chat-window" id="chat-window">
+        <div class="chat-empty" id="chat-empty">
+          <div class="emoji">🤖</div>
+          <div>Say something to start the conversation</div>
+        </div>
+      </div>
+
+      <div class="chat-input-row">
+        <textarea id="agent-input" placeholder="Type your message…" rows="2"
+                  onkeydown="handleChatKey(event)"></textarea>
+        <button class="btn btn-amber" onclick="sendToAgent()" id="agent-btn" style="margin-top:0">Send →</button>
+      </div>
+
+      <div class="chat-actions">
+        <div class="loader" id="agent-loader" style="margin-top:0">
+          <div class="spinner"></div> Thinking…
+        </div>
+        <button class="btn btn-ghost" onclick="resetChat()">↺ Reset Chat</button>
+      </div>
+
+      <div class="error-msg" id="agent-error"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- API URL Config -->
+<div class="api-config">
+  <button class="api-toggle" onclick="toggleApiPanel()">⚙ API URL</button>
+  <div class="api-panel" id="api-panel">
+    <label>BACKEND URL</label>
+    <input type="text" id="api-url-input" value="http://localhost:8000" placeholder="http://localhost:8000"/>
+    <button class="btn btn-cyan" onclick="saveApiUrl()" style="font-size:12px; padding:8px 16px;">Save</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
