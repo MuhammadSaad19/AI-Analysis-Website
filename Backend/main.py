@@ -12,6 +12,7 @@ from PIL import Image
 import uvicorn
 import threading
 import transformers
+import gdown
 
 app = FastAPI(title="AI Models API")
 
@@ -23,13 +24,33 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+# Resume Classifier Model
+RESUME_MODEL_PATH = "model/resume_quality_model.h5"
+if not os.path.exists(RESUME_MODEL_PATH):
+    os.makedirs("model", exist_ok=True)
+    gdown.download(
+        "https://drive.google.com/uc?id=1Cal6rC6e8GYid4SZ3lrs244jZlTtjunf",
+        RESUME_MODEL_PATH,
+        quiet=False
+    )
+
+# Sentiment Analysis Model
+SENTIMENT_MODEL_PATH = "model/sentiment_model"
+if not os.path.exists(SENTIMENT_MODEL_PATH):
+    os.makedirs("model", exist_ok=True)
+    gdown.download(
+        "https://drive.google.com/uc?id=1cwnGd2f0TKdJc52ZrrEnwMrz5MNThZnr",
+        SENTIMENT_MODEL_PATH,
+        quiet=False
+    )
 # ─── 1. IMAGE MODEL ───────────────────────────────────────────────────────────
-IMAGE_MODEL_PATH = "/content/drive/MyDrive/Classroom/AI 6c 4(Lab)/AI Project /AI Resume Quality Analyzer/Backend/model/Copy of resume_quality_model.h5"
+IMAGE_MODEL_PATH = "model/resume_quality_model.h5"
 image_model = load_model(IMAGE_MODEL_PATH)
 IMAGE_CLASS_NAMES = ["Good", "Average", "Poor"]
 
 # ─── 2. NLP MODEL (BART fine-tuned) ──────────────────────────────────────────
-NLP_MODEL_PATH = "/content/drive/MyDrive/Classroom/AI 6c 4(Lab)/AI Project /AI Resume Quality Analyzer/Backend/model/Copy of sentiment_model_current_state.pt"
+NLP_MODEL_PATH = "model/sentiment_model_current_state.pt"
 BART_MODEL_NAME = "facebook/bart-base"
 NLP_CLASS_NAMES = ["Negative", "Positive", "Neutral"]
 

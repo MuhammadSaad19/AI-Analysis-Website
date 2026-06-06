@@ -10,3 +10,4 @@ requests
 google-generativeai
 pydantic
 transformers
+gdown
