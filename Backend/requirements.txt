@@ -7,7 +7,7 @@ pillow
 torch==2.1.0+cpu
 torchvision==0.16.0+cpu
 tensorflow-cpu==2.20.0
-keras==3.12.2
+tf-keras
 requests
 google-generativeai
 pydantic

@@ -6,7 +6,7 @@ import io
 import os
 import torch
 import requests as http_requests
-from tensorflow.keras.models import load_model
+import tf_keras
 from tensorflow.keras.preprocessing import image as keras_image
 from PIL import Image
 import uvicorn
@@ -46,7 +46,7 @@ if not os.path.exists(SENTIMENT_MODEL_PATH):
     )
 # ─── 1. IMAGE MODEL ───────────────────────────────────────────────────────────
 IMAGE_MODEL_PATH = "model/resume_quality_model.h5"
-image_model = load_model(IMAGE_MODEL_PATH)
+-model = tf_keras.models.load_model(IMAGE_MODEL_PATH)
 IMAGE_CLASS_NAMES = ["Good", "Average", "Poor"]
 
 # ─── 2. NLP MODEL (BART fine-tuned) ──────────────────────────────────────────
