@@ -46,7 +46,7 @@ if not os.path.exists(SENTIMENT_MODEL_PATH):
     )
 # ─── 1. IMAGE MODEL ───────────────────────────────────────────────────────────
 IMAGE_MODEL_PATH = "model/resume_quality_model.h5"
--model = tf_keras.models.load_model(IMAGE_MODEL_PATH)
+model = tf_keras.models.load_model(IMAGE_MODEL_PATH)
 IMAGE_CLASS_NAMES = ["Good", "Average", "Poor"]
 
 # ─── 2. NLP MODEL (BART fine-tuned) ──────────────────────────────────────────
