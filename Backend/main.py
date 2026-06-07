@@ -6,7 +6,7 @@ import io
 import os
 import torch
 import requests as http_requests
-import tf_keras
+import tensorflow as tf
 from tensorflow.keras.preprocessing import image as keras_image
 from PIL import Image
 import uvicorn
@@ -31,7 +31,7 @@ RESUME_MODEL_PATH = "model/resume_quality_model.keras"
 if not os.path.exists(RESUME_MODEL_PATH):
     os.makedirs("model", exist_ok=True)
     gdown.download(
-        "https://drive.google.com/uc?id=1By1e6PwE4_3m1MxPJ-arunarGweR6X2v",
+        "https://drive.google.com/uc?id=1b-z885G8926Rg5ofF7vBj5EtT9tbo61g",
         RESUME_MODEL_PATH,
         quiet=False
     )
@@ -47,7 +47,7 @@ if not os.path.exists(SENTIMENT_MODEL_PATH):
     )
 # ─── 1. IMAGE MODEL ───────────────────────────────────────────────────────────
 IMAGE_MODEL_PATH = "model/resume_quality_model.keras"
-image_model = tf_keras.models.load_model(RESUME_MODEL_PATH)
+image_model = tf.keras.models.load_model(RESUME_MODEL_PATH)
 IMAGE_CLASS_NAMES = ["Good", "Average", "Poor"]
 
 # ─── 2. NLP MODEL (BART fine-tuned) ──────────────────────────────────────────
