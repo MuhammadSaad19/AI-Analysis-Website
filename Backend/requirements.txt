@@ -6,7 +6,6 @@ numpy==2.0.2
 pillow
 tensorflow-cpu==2.20.0
 torch==2.11.0+cpu
-torchvision==0.22.0+cpu
 transformers==5.9.0
 requests
 google-generativeai
