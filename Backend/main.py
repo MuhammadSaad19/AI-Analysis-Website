@@ -30,7 +30,7 @@ RESUME_MODEL_PATH = "model/resume_quality_model.h5"
 if not os.path.exists(RESUME_MODEL_PATH):
     os.makedirs("model", exist_ok=True)
     gdown.download(
-        "https://drive.google.com/uc?id=1Cal6rC6e8GYid4SZ3lrs244jZlTtjunf",
+        "https://drive.google.com/uc?id=1By1e6PwE4_3m1MxPJ-arunarGweR6X2v",
         RESUME_MODEL_PATH,
         quiet=False
     )
@@ -46,7 +46,7 @@ if not os.path.exists(SENTIMENT_MODEL_PATH):
     )
 # ─── 1. IMAGE MODEL ───────────────────────────────────────────────────────────
 IMAGE_MODEL_PATH = "model/resume_quality_model.h5"
-model = tf_keras.models.load_model(IMAGE_MODEL_PATH)
+model = tf_keras.models.load_model(RESUME_MODEL_PATH)
 IMAGE_CLASS_NAMES = ["Good", "Average", "Poor"]
 
 # ─── 2. NLP MODEL (BART fine-tuned) ──────────────────────────────────────────
