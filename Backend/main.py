@@ -31,7 +31,7 @@ RESUME_MODEL_PATH = "model/resume_quality_model.keras"
 if not os.path.exists(RESUME_MODEL_PATH):
     os.makedirs("model", exist_ok=True)
     gdown.download(
-        "https://drive.google.com/uc?id=1b-z885G8926Rg5ofF7vBj5EtT9tbo61g",
+        "https://drive.google.com/uc?id=1e0_qF1RYa02p17nCK-B6u8j1L4bSpin5",
         RESUME_MODEL_PATH,
         quiet=False
     )
