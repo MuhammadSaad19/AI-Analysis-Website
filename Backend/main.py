@@ -26,7 +26,7 @@ app.add_middleware(
 
 
 # Resume Classifier Model
-RESUME_MODEL_PATH = "model/resume_quality_model.h5"
+RESUME_MODEL_PATH = "model/resume_quality_model.keras"
 if not os.path.exists(RESUME_MODEL_PATH):
     os.makedirs("model", exist_ok=True)
     gdown.download(
@@ -45,7 +45,7 @@ if not os.path.exists(SENTIMENT_MODEL_PATH):
         quiet=False
     )
 # ─── 1. IMAGE MODEL ───────────────────────────────────────────────────────────
-IMAGE_MODEL_PATH = "model/resume_quality_model.h5"
+IMAGE_MODEL_PATH = "model/resume_quality_model.keras"
 model = tf_keras.models.load_model(RESUME_MODEL_PATH)
 IMAGE_CLASS_NAMES = ["Good", "Average", "Poor"]
 
