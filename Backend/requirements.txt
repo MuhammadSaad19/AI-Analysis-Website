@@ -5,6 +5,7 @@ python-multipart
 numpy==2.0.2
 pillow
 tensorflow-cpu==2.20.0
+tf-keras
 torch==2.11.0+cpu
 transformers==5.9.0
 requests

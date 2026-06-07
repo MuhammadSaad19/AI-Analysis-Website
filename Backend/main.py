@@ -13,6 +13,7 @@ import uvicorn
 import threading
 import transformers
 import gdown
+import time
 
 app = FastAPI(title="AI Models API")
 
@@ -46,11 +47,11 @@ if not os.path.exists(SENTIMENT_MODEL_PATH):
     )
 # ─── 1. IMAGE MODEL ───────────────────────────────────────────────────────────
 IMAGE_MODEL_PATH = "model/resume_quality_model.keras"
-model = tf_keras.models.load_model(RESUME_MODEL_PATH)
+image_model = tf_keras.models.load_model(RESUME_MODEL_PATH)
 IMAGE_CLASS_NAMES = ["Good", "Average", "Poor"]
 
 # ─── 2. NLP MODEL (BART fine-tuned) ──────────────────────────────────────────
-NLP_MODEL_PATH = "model/sentiment_model_current_state.pt"
+NLP_MODEL_PATH = "model/sentiment_model"
 BART_MODEL_NAME = "facebook/bart-base"
 NLP_CLASS_NAMES = ["Negative", "Positive", "Neutral"]
 
@@ -245,6 +246,6 @@ async def chat_gemini(req: GeminiRequest):
 def run_fastapi():
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port, reload=False)
-t = threading.Thread(target=run_fastapi, daemon=True)
-t.start()
-print("FastAPI started on port 8000 ✓")
+# t = threading.Thread(target=run_fastapi, daemon=True)
+# t.start()
+# print("FastAPI started on port 8000 ✓")
